@@ -13,9 +13,9 @@ def moderate(input):
     return boolean_result
 
 
-def ask_gpt(system, question):
+def ask_gpt(system, question, model="gpt-3.5-turbo"):
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model=model,
         messages=[{"role": "user", "content": question},
                   {"role": "system", "content": system}],
         stream=False,
