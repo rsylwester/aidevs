@@ -1,4 +1,6 @@
 import openai
+import whisper
+
 from openai import OpenAI
 from openai.types import Moderation
 from openai.types.chat.chat_completion import Choice
@@ -6,7 +8,7 @@ from openai.types.chat.chat_completion import Choice
 from env import OPENAI_API_KEY
 
 client = OpenAI(api_key=OPENAI_API_KEY)
-
+whipser = whisper.load_model("base")
 
 def moderate(input):
     modration_result: list[Moderation] = client.moderations.create(input=input).results
@@ -47,3 +49,12 @@ def generate_embedding(text, engine="text-embedding-ada-002"):
     # Extract and return the embedding vector
     embedding_vector = response.data[0].embedding
     return embedding_vector
+
+
+def transcribe(filepath):
+    audio_file= open(filepath, "rb")
+    transcription = client.audio.transcriptions.create(
+        model="whisper-1",
+        file=audio_file
+    )
+    return transcription.text
