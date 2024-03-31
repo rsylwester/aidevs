@@ -1,10 +1,7 @@
-from langchain_openai import ChatOpenAI
 from pydantic import Field, BaseModel
 from requests import Response
 
 import api_aidevs
-
-llm = ChatOpenAI(model="gpt-3.5-turbo-0125")
 
 """
 Authorize and retrieve text of the task
