@@ -1,11 +1,11 @@
-import openai_proxy
-import task_api
+import api_openai
+import api_aidevs
 
-text="Hawaiian pizza"
+text = "Hawaiian pizza"
 
-token = task_api.auth("embedding")
-task_json: dict = task_api.get_task(token)
+token = api_aidevs.auth("embedding")
+task_json: dict = api_aidevs.get_task(token)
 
-answer = openai_proxy.generate_embedding(text)
+answer = api_openai.generate_embedding(text)
 
-task_api.send_answer(token, answer)
+api_aidevs.send_answer(token, answer)

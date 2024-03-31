@@ -3,8 +3,8 @@ import os
 import requests
 from requests import Response
 
-import openai_proxy
-import task_api
+import api_openai
+import api_aidevs
 
 def download_mp3(url, filepath):
     response = requests.get(url, stream=True)
@@ -24,12 +24,12 @@ def download_mp3(url, filepath):
 url = "https://tasks.aidevs.pl/data/mateusz.mp3"
 filepath = os.path.join(os.path.curdir, "mateusz.mp3")
 
-token = task_api.auth("whisper")
-task_json: dict = task_api.get_task(token)
+token = api_aidevs.auth("whisper")
+task_json: dict = api_aidevs.get_task(token)
 
-answer = openai_proxy.transcribe(filepath)
+answer = api_openai.transcribe(filepath)
 
-response: Response = task_api.send_answer(token, answer)
+response: Response = api_aidevs.send_answer(token, answer)
 
 if response.json()['note'] == 'CORRECT':
     os.remove(filepath)

@@ -1,2 +1,7 @@
 .env
-*/.DS_Store
+.DS_Store
+.idea/
+.python-version
+aidevs/.DS_Store
+aidevs/__pycache__/
+

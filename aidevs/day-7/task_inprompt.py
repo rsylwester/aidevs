@@ -2,8 +2,8 @@ import concurrent
 
 from tqdm import tqdm
 
-import openai_proxy
-import task_api
+import api_openai
+import api_aidevs
 
 instruction = "Answer question precisely. No comments.\n"
 context = "Context```{}```"
@@ -14,12 +14,12 @@ def extract_name(text: str):
     No allowed making up name 
     No special characters allowed in response [,.?]
     No additional comments allowed"""
-    name = openai_proxy.ask_gpt(system=instruction, question=text, model="gpt-3.5-turbo")
+    name = api_openai.ask_gpt(system=instruction, question=text, model="gpt-3.5-turbo")
     return name
 
 
-token = task_api.auth("inprompt")
-task_json: dict = task_api.get_task(token)
+token = api_aidevs.auth("inprompt")
+task_json: dict = api_aidevs.get_task(token)
 
 input: list = task_json['input']
 question: list = task_json['question']
@@ -44,7 +44,7 @@ related_sentences = "\n".join([value for key, value in db.items() if key in ques
 context = context.format(related_sentences)
 system = instruction + context
 
-answer = openai_proxy.ask_gpt(system=system, question=question)
+answer = api_openai.ask_gpt(system=system, question=question)
 
 print(f"Answer: {answer}")
-task_api.send_answer(token, answer)
+api_aidevs.send_answer(token, answer)

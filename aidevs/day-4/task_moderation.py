@@ -1,9 +1,9 @@
-import openai_proxy
-import task_api
+import api_openai
+import api_aidevs
 
-token = task_api.auth("moderation")
-task_json: dict = task_api.get_task(token)
+token = api_aidevs.auth("moderation")
+task_json: dict = api_aidevs.get_task(token)
 
-moderation_result = openai_proxy.moderate(task_json['input'])
-task_api.send_answer(token, moderation_result)
+moderation_result = api_openai.moderate(task_json['input'])
+api_aidevs.send_answer(token, moderation_result)
 

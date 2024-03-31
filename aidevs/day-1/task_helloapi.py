@@ -1,7 +1,7 @@
-import task_api
+import api_aidevs
 
-token = task_api.auth("helloapi")
-task_json: dict = task_api.get_task(token)
+token = api_aidevs.auth("helloapi")
+task_json: dict = api_aidevs.get_task(token)
 
-task_api.send_answer(token, task_json['cookie'])
+api_aidevs.send_answer(token, task_json['cookie'])
 

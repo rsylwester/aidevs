@@ -8,9 +8,9 @@ authors = ["Sylwester Rogalski <rsylwester@icloud.com>"]
 python = ">=3.11.8,<3.13"
 requests = "^2.31.0"
 python-dotenv = "^1.0.1"
-openai = "^1.14.2"
-openai-whisper = "^2.1.5"
+openai = "^1.14.3"
 tqdm = "^4.66.2"
+langchain = "^0.1.13"
 
 [build-system]
 requires = ["poetry-core"]

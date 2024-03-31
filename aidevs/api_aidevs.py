@@ -3,6 +3,7 @@ from requests import Response
 
 from aidevs import env
 
+
 def auth(task):
     data = {
         "apikey": env.AIDEVS_API_KEY
