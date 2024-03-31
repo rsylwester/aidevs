@@ -6,6 +6,7 @@ from requests import Response
 import api_openai
 import api_aidevs
 
+
 def download_mp3(url, filepath):
     response = requests.get(url, stream=True)
     # Check if the request succeeded
@@ -21,15 +22,28 @@ def download_mp3(url, filepath):
         print(f'Failed to download the file ({response.status_code})')
 
 
-url = "https://tasks.aidevs.pl/data/mateusz.mp3"
-filepath = os.path.join(os.path.curdir, "mateusz.mp3")
-
+"""
+Authorize and retrieve text of the task
+"""
 token = api_aidevs.auth("whisper")
 task_json: dict = api_aidevs.get_task(token)
 
+
+"""
+Issue solving
+"""
+url = "https://tasks.aidevs.pl/data/mateusz.mp3"
+filepath = os.path.join(os.path.curdir, "mateusz.mp3")
+
 answer = api_openai.transcribe(filepath)
 
+"""
+Sending solution of the task
+"""
 response: Response = api_aidevs.send_answer(token, answer)
 
+"""
+Additional logic on CORRECT solution
+"""
 if response.json()['note'] == 'CORRECT':
     os.remove(filepath)

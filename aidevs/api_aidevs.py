@@ -1,3 +1,5 @@
+import json
+
 import requests
 from requests import Response
 
@@ -55,14 +57,24 @@ def get_task(token, debug=True) -> dict:
     return response.json()
 
 
-def send_answer(token, answer, debug=True) -> Response:
+def send_answer(token, answer, answer_as_json=False, debug=True) -> Response:
     send_answer_url = env.AIDEVS_SEND_ANSWER_URL.format(token)
 
-    answer_body = {"answer": answer}
+    answer_body = dict()
+
+    if debug:
+        print(json.dumps(answer_body))
+
+    if answer_as_json:
+        answer_body["answer"] = json.loads(answer)
+    else:
+        answer_body["answer"] = answer
+
+    if debug:
+        print(answer_body)
 
     response = requests.post(send_answer_url, json=answer_body)
 
-    if debug:
-        print(response.json())
+    print(response.json())
 
     return response
