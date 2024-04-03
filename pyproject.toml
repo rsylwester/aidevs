@@ -13,6 +13,7 @@ tqdm = "^4.66.2"
 langchain = "^0.1.13"
 langchain-openai = "^0.1.1"
 langchain-core = "^0.1.36"
+langchain-community = "^0.0.31"
 
 [build-system]
 requires = ["poetry-core"]
