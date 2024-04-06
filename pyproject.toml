@@ -11,6 +11,7 @@ python-dotenv = "^1.0.1"
 openai = "^1.14.3"
 tqdm = "^4.66.2"
 llama-index = "^0.10.27"
+llama-index-vector-stores-qdrant = "^0.1.6"
 
 [build-system]
 requires = ["poetry-core"]

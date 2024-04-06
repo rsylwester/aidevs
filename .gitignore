@@ -5,3 +5,6 @@
 aidevs/.DS_Store
 aidevs/__pycache__/
 
+/aidevs/day-14/qdrant_data/
+/aidevs/day-14/archiwum_aidevs.json
+/aidevs/day-14/shelve_db
