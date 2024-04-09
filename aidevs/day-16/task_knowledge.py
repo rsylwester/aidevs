@@ -1,15 +1,14 @@
 import json
 from typing import Sequence, List
 
-from llama_index.core.base.llms.types import ChatMessage, MessageRole
+from llama_index.core.base.llms.types import ChatMessage
 from llama_index.core.tools import BaseTool, FunctionTool
+from llama_index.llms.openai import OpenAI
 from openai.types.chat import ChatCompletionMessageToolCall
 from requests import Response
 
 import api_aidevs
 import apis
-from llama_index.agent.openai import OpenAIAgent
-from llama_index.llms.openai import OpenAI
 
 """
 Authorize and retrieve text of the task
