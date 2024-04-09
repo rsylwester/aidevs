@@ -17,6 +17,7 @@ fuzzywuzzy = "^0.18.0"
 llama-index-embeddings-huggingface = "^0.2.0"
 sentence-transformers = "^2.6.1"
 sacremoses = "^0.1.1"
+python-restcountries = "^2.0.0"
 
 [build-system]
 requires = ["poetry-core"]

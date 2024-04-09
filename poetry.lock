@@ -2136,6 +2136,20 @@ files = [
 cli = ["click (>=5.0)"]
 
 [[package]]
+name = "python-restcountries"
+version = "2.0.0"
+description = "Python API Wrapper for restcountries.com"
+optional = false
+python-versions = "*"
+files = [
+    {file = "python-restcountries-2.0.0.tar.gz", hash = "sha256:17ef11e7a67f7ee1649bc901ce87cb495f0e3a4d102daaef47cb620ecc545143"},
+    {file = "python_restcountries-2.0.0-py3-none-any.whl", hash = "sha256:f92a7669962bdcb610f0bd500611f144a185ddc0556292167bb32327984fced9"},
+]
+
+[package.dependencies]
+requests = "*"
+
+[[package]]
 name = "pytz"
 version = "2024.1"
 description = "World timezone definitions, modern and historical"
@@ -3399,4 +3413,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11.8,<3.13"
-content-hash = "985a5df98e82fb7843e8e7a745d32fa922cdbfd0c03ffdcc0e6cd0ba24eff865"
+content-hash = "862dd541a6cfbe889db578ee95e722d4316f00488f3ce0c9d7b20efe78616d43"
