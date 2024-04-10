@@ -38,7 +38,7 @@ class Agent:
         self._tools = {tool.metadata.name: tool for tool in tools}
 
     def ask(self, message: str) -> str:
-        chat_history: List[ChatMessage] = [ChatMessage(role="system", content=instruction)]
+        chat_history: List[ChatMessage] = []
 
         chat_history.append(ChatMessage(role="user", content=message))
         tools = [
