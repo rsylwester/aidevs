@@ -21,6 +21,9 @@ def add_task_todo_list(task_name: str) -> dict:
     Returns:
     dict: json
     '''
+
+    print(f"add_task_todo_list: {locals()}")
+
     return {
         "tool": "ToDo",
         "desc": task_name
@@ -38,6 +41,8 @@ def add_event_to_calendar(desc: str, date_str: str) -> dict:
     Returns:
     dict: json
     '''
+
+    print(f"add_event_to_calendar: {locals()}")
 
     now = pendulum.now()
     if date_str.lower() == "jutro":

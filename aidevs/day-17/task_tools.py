@@ -8,7 +8,7 @@ from openai.types.chat import ChatCompletionMessageToolCall
 from requests import Response
 
 import api_aidevs
-import apis
+import functions
 
 """
 Authorize and retrieve text of the task
@@ -25,13 +25,13 @@ Classify question to one of categories:
 """
 question = task_json['question']
 
-add_task_todo_list = FunctionTool.from_defaults(fn=apis.add_task_todo_list)
-add_event_to_calendar = FunctionTool.from_defaults(fn=apis.add_event_to_calendar)
+add_task_todo_list = FunctionTool.from_defaults(fn=functions.add_task_todo_list)
+add_event_to_calendar = FunctionTool.from_defaults(fn=functions.add_event_to_calendar)
 
-llm = OpenAI(temperature=0, model="gpt-4")
+llm = OpenAI(temperature=0, model="gpt-3.5-turbo")
 
 
-class Agent:
+class FunctionCaller:
     def __init__(self, tools: Sequence[BaseTool] = [], llm: OpenAI = llm):
         self._llm = llm
         self._tools = {tool.metadata.name: tool for tool in tools}
@@ -39,7 +39,12 @@ class Agent:
     def ask(self, message: str) -> dict:
         chat_history: List[ChatMessage] = [
             ChatMessage(role="system",
-                        content="Skip any comments or questions. Respond with one of predefined in context functions."),
+                        content=f"""
+                        Skip any comments or questions. 
+                        Respond with one of predefined in context functions.
+                        If user specifies date or time respond with: {str(functions.add_event_to_calendar.__name__)}
+                        If no date/time specified respond with: {str(functions.add_task_todo_list.__name__)}
+                        """),
             ChatMessage(role="user", content=message)
         ]
         tools = [tool.metadata.to_openai_tool() for _, tool in self._tools.items()]
@@ -60,7 +65,7 @@ class Agent:
         return tool(**json.loads(function_call.arguments)).raw_output
 
 
-agent: Agent = Agent(tools=[add_task_todo_list, add_event_to_calendar], llm=llm)
+agent: FunctionCaller = FunctionCaller(tools=[add_task_todo_list, add_event_to_calendar], llm=llm)
 
 answer = agent.ask(question)
 
