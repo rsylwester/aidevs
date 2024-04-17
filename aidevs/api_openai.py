@@ -47,7 +47,6 @@ def generate_embedding(text, engine="text-embedding-ada-002"):
     embedding_vector = response.data[0].embedding
     return embedding_vector
 
-
 def transcribe(filepath):
     audio_file = open(filepath, "rb")
     transcription = client.audio.transcriptions.create(
